@@ -9,3 +9,4 @@ coverage
 .sf/
 .vercel/
 .DS_Store
+.vercel
