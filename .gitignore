@@ -1,0 +1,11 @@
+node_modules
+.next
+*.tsbuildinfo
+.env*
+coverage
+
+.playwright-mcp
+
+.sf/
+.vercel/
+.DS_Store

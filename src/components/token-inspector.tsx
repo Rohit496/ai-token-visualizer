@@ -1,0 +1,6 @@
+import { X } from 'lucide-react';
+import { Button } from './ui/button';
+import type { Token } from '@/lib/tokenizers/types';
+export function TokenInspector({ token, tokenizer, onClose }: { token: Token; tokenizer: string; onClose: () => void }) {
+  return <aside className="inspector" aria-label="Token inspector"><div className="section-heading"><h2>Token inspector</h2><Button variant="ghost" onClick={onClose} aria-label="Close inspector"><X size={18}/></Button></div><code className="inspector-text">{JSON.stringify(token.text)}</code><dl>{Object.entries({ 'Token index': token.index, 'Token ID': token.id, 'Character length': token.partialUtf8 ? 'Partial character · see bytes' : Array.from(token.text).length, 'Tokenizer': tokenizer, 'Byte offset': `${token.byteStart}–${token.byteEnd} (end exclusive)`, 'Escaped text': JSON.stringify(token.text).replaceAll(' ', '·'), 'Bytes (hex)': token.bytes.map(b => b.toString(16).padStart(2, '0')).join(' ') }).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>{token.partialUtf8 && <p className="muted">This token contains part of a UTF-8 character. Its standalone decoding may contain �. The text view joins bytes and shows the character on the token that completes it; a small marker identifies empty fragments.</p>}</aside>;
+}
